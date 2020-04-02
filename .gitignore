@@ -1,6 +1,2 @@
 node_modules/
 package-lock.json
-dist/api
-dist/bin
-dist/middlewares
-dist/app.js

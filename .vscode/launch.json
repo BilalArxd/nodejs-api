@@ -8,8 +8,10 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Node-Api",
-      "program": "${workspaceFolder}/src/bin/www",
-      "skipFiles": ["<node_internals>/**"]
+      "program": "${workspaceFolder}/dist/bin/www",
+      "preLaunchTask": "build",
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
     }
   ]
 }
