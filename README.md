@@ -26,6 +26,10 @@ This project would be helpful if you are getting started with developing API's u
 - Add authentication and authorization using JWT and roles.
 - Configure MySQL with data layer.
 - Add Generics for data and business layer.
+- ...
+- ...
+- ...
+- Add more tasks.
 
 ## Usage
 
