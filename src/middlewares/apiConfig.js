@@ -1,9 +1,9 @@
-var indexController = require("../api/index.controller");
-var usersController = require("../api/users.controller");
+var index = require("../api");
+var usersApi = require("../api/users/usersApi");
 
 let configure = function(app) {
-  app.use("/", indexController);
-  app.use("/users", usersController);
+  app.use("/", index);
+  app.use("/users", usersApi);
 };
 
 module.exports = {

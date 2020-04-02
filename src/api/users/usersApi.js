@@ -1,12 +1,16 @@
 var express = require("express");
 var router = express.Router();
-var users = require("../data/users.json");
+
+var usersService = require("./usersService");
+
+//#region Swagger Specification
 /**
  * @typedef User
  * @property {number} id - User's unique ID - eg: 123
  * @property {string} name.required - User's fullname with space - eg: John Doe
  * @property {string} email.required - User's email - eg: abc@xyz.com
  */
+//#endregion
 
 /**
  * Get array of all users
@@ -17,6 +21,7 @@ var users = require("../data/users.json");
  * @returns {Error} 404 - Users not found
  */
 router.get("/", function(req, res, next) {
+  var users = usersService.get();
   res.status(200).send(users);
 });
 
@@ -31,12 +36,9 @@ router.get("/", function(req, res, next) {
  */
 router.get("/:id", function(req, res, next) {
   const id = parseInt(req.params.id);
-  const filteredUsers = users.filter(u => {
-    if (u.id === id) return true;
-    return false;
-  });
-  if (filteredUsers.length > 0) {
-    res.status(200).send(success(filteredUsers));
+  var users = usersService.getById(id);
+  if (users.length > 0) {
+    res.status(200).send(success(users));
   } else {
     res.status(404).send(fail("User not found."));
   }
@@ -54,14 +56,9 @@ router.get("/:id", function(req, res, next) {
  */
 router.post("/", function(req, res, next) {
   const user = req.body;
-  users.push(user);
-  const id = user.id;
-  const filteredUsers = users.filter(u => {
-    if (u.id === id) return true;
-    return false;
-  });
-  if (filteredUsers.length > 0) {
-    res.status(201).send(success(filteredUsers));
+  var addedUser = usersService.create(user);
+  if (addedUser != null) {
+    res.status(201).send(success(addedUser));
   } else {
     res.status(404).send(fail("User not found."));
   }
@@ -80,23 +77,9 @@ router.post("/", function(req, res, next) {
 router.put("/:id", function(req, res, next) {
   const id = parseInt(req.params.id);
   const user = req.body;
-  let filteredUsers = users.map(u => {
-    if (u.id === id) {
-      if (user.name !== undefined) {
-        u.name = user.name;
-      }
-      if (user.email !== undefined) {
-        u.email = user.email;
-      }
-    }
-    return u;
-  });
-  filteredUsers = filteredUsers.filter(u => {
-    if (u.id === id) return true;
-    return false;
-  });
-  if (filteredUsers.length > 0) {
-    res.status(202).send(success(filteredUsers));
+  const updatedUsers = usersService.update(id, user);
+  if (updatedUsers.length > 0) {
+    res.status(202).send(success(updatedUsers));
   } else {
     res.status(404).send(fail("User not found."));
   }
@@ -113,14 +96,8 @@ router.put("/:id", function(req, res, next) {
  */
 router.delete("/:id", function(req, res, next) {
   const id = parseInt(req.params.id);
-  const filteredUsers = users.filter(u => {
-    if (u.id !== id) return true;
-    return false;
-  });
-  console.log("filLen:", filteredUsers.length);
-  console.log("userslLen:", users.length - 1);
-  if (filteredUsers.length == users.length - 1) {
-    users = filteredUsers;
+  var response = usersService.remove(id);
+  if (response) {
     res.status(202).send(success(null, "User deleted successfully."));
   } else {
     res.status(404).send(fail("User not found."));
