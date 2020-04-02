@@ -1,20 +1,42 @@
-## Simple NodeJS Api with ExpressJS
+# Simple NodeJS API
 
-#### Tech Stack
+## About
+
+This project would be helpful if you are getting started with developing API's using NodeJS using TypeScript, Swagger and MySQL. I developed it for my personal learning with NodeJS and ExpressJS. I'll add more features and will improve its codebase in the future.
+
+## Technologies Used
 
 - NodeJS
 - ExpressJS
+- TypeScript
 - Swagger
-- Jade
 - MySQL
 
-#### How to run the API
+## Todo
 
-- ##### Npm
+- ~~Hello World with NodeJS~~
+- ~~Creating First Endpoint.~~
+- ~~Adding swagger documentation and playground.~~
+- ~~Setting up maintainable project structure.~~
+- ~~Switch from Javascript to TypeScript.~~
+- ~~Enable VSCode debugging.~~
+- ~~Add pre build tasks.~~
+- Add tests and enough coverage.
+- Configure task manager to auto detect changes, run tests, etc.
+- Add authentication and authorization using JWT and roles.
+- Configure MySQL with data layer.
+- Add Generics for data and business layer.
 
-  1. `npm install`
-  2. `npm start`
+## Usage
 
-- ##### Yarn
-  1. `yarn`
-  2. `yarn run start`
+```bash
+  npm install
+  npm start
+```
+
+OR
+
+```bash
+  yarn
+  yarn run start
+```
