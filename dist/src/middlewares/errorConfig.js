@@ -1,8 +1,12 @@
 "use strict";
-var createError = require("http-errors");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var http_errors_1 = __importDefault(require("http-errors"));
 var configureErrors = function (app) {
     app.use(function (req, res, next) {
-        next(createError(404));
+        next(http_errors_1.default(404));
     });
     // error handler
     app.use(function (err, req, res, next) {
@@ -14,6 +18,6 @@ var configureErrors = function (app) {
         res.render("error");
     });
 };
-module.exports = {
+exports.default = {
     configure: configureErrors
 };

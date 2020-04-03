@@ -1,5 +1,4 @@
-"use strict";
-var usersData = require("./usersData");
+var usersData = require("../data/usersData");
 var get = function () {
     var response = usersData.get();
     return response;

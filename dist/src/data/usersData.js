@@ -1,5 +1,4 @@
-"use strict";
-var users = require("../../data/users.json");
+var users = require("../json/users.json");
 var getAll = function () {
     return users;
 };

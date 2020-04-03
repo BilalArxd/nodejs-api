@@ -1,5 +1,6 @@
-var users = require("../../data/users.json");
+import usersJson from "../json/users.json";
 
+let users = usersJson;
 let getAll = function() {
   return users;
 };
@@ -51,7 +52,7 @@ let removeUser = function(id: any) {
   }
 };
 
-module.exports = {
+export default {
   create: createUser,
   get: getAll,
   getById: getUserById,

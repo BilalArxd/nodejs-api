@@ -1,11 +1,10 @@
-var index = require("../api");
-var usersApi = require("../api/users/usersApi");
+import homeController from "../controllers/homeController";
+import usersController from "../controllers/usersController";
 
-let configureApi = function(app: any) {
-  app.use("/", index);
-  app.use("/users", usersApi);
+let configureApi = function (app: any) {
+  app.use("/", homeController);
+  app.use("/users", usersController);
 };
-
-module.exports = {
+export default {
   configure: configureApi
 };

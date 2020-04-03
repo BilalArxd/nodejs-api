@@ -1,5 +1,6 @@
-var express = require("express");
+import express from "express";
+import middlewares from "./middlewares";
+
 var app = express();
-var middlewares = require("./middlewares");
 middlewares.configure(app);
-module.exports = app;
+export default app;

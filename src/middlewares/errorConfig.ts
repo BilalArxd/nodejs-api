@@ -1,12 +1,12 @@
-var createError = require("http-errors");
+import createError from "http-errors";
 
-let configureErrors = function(app: any) {
-  app.use(function(req: any, res: any, next: any) {
+let configureErrors = function (app: any) {
+  app.use(function (req: any, res: any, next: any) {
     next(createError(404));
   });
 
   // error handler
-  app.use(function(err: any, req: any, res: any, next: any) {
+  app.use(function (err: any, req: any, res: any, next: any) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -17,6 +17,6 @@ let configureErrors = function(app: any) {
   });
 };
 
-module.exports = {
+export default {
   configure: configureErrors
 };

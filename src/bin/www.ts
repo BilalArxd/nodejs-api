@@ -3,8 +3,7 @@
 /**
  * Module dependencies.
  */
-
-var app = require("../app");
+import app from "../app";
 var debug = require("debug")("express:server");
 var http = require("http");
 

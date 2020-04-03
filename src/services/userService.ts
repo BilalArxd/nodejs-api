@@ -1,31 +1,31 @@
-var usersData = require("./usersData");
+import userData from "../data/userData";
 
 let get = function() {
-  const response = usersData.get();
+  const response = userData.get();
   return response;
 };
 
 let getById = function(id: any) {
-  const response = usersData.getById(id);
+  const response = userData.getById(id);
   return response;
 };
 
 let create = function(user: any) {
-  const response = usersData.create(user);
+  const response = userData.create(user);
   return response;
 };
 
 let update = function(id: any, user: any) {
-  const response = usersData.update(id, user);
+  const response = userData.update(id, user);
   return response;
 };
 
 let remove = function(id: any) {
-  const response = usersData.remove(id);
+  const response = userData.remove(id);
   return response;
 };
 
-module.exports = {
+export default {
   create: create,
   get: get,
   getById: getById,

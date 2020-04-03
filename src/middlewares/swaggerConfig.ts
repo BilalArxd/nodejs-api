@@ -1,5 +1,6 @@
+import swagger from "express-swagger-generator";
 let configureSwagger = function(app: any) {
-  const expressSwagger = require("express-swagger-generator")(app);
+  const expressSwagger = swagger(app);
   let options = {
     swaggerDefinition: {
       info: {
@@ -13,11 +14,11 @@ let configureSwagger = function(app: any) {
       schemes: ["http", "https"]
     },
     basedir: __dirname, //app absolute path
-    files: ["../api/**/*.js"] //Path to the API handle folder
+    files: ["../controllers/**/*.js"] //Path to the API handle folder
   };
   expressSwagger(options);
 };
 
-module.exports = {
+export default {
   configure: configureSwagger
 };
