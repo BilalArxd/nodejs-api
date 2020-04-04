@@ -1,5 +1,6 @@
 import * as express from "express";
 import userService from "../services/userService";
+import { BaseModel } from "../utils/BaseModel";
 
 var usersController = express.Router();
 
@@ -23,7 +24,7 @@ var usersController = express.Router();
 
 usersController.get("/", function (req: any, res: any, next: any) {
   var users = userService.get();
-  res.status(200).send(users);
+  res.status(200).send(BaseModel.success(users));
 });
 
 /**
@@ -39,9 +40,9 @@ usersController.get("/:id", function (req: any, res: any, next: any) {
   const id = parseInt(req.params.id);
   var users = userService.getById(id);
   if (users.length > 0) {
-    res.status(200).send(success(users, null));
+    res.status(200).send(BaseModel.success(users, null));
   } else {
-    res.status(404).send(fail("User not found."));
+    res.status(404).send(BaseModel.fail("User not found."));
   }
 });
 
@@ -59,9 +60,9 @@ usersController.post("/", function (req: any, res: any, next: any) {
   const user = req.body;
   var addedUser = userService.create(user);
   if (addedUser != null) {
-    res.status(201).send(success(addedUser, null));
+    res.status(201).send(BaseModel.success(addedUser, null));
   } else {
-    res.status(404).send(fail("User not found."));
+    res.status(404).send(BaseModel.fail("User not found."));
   }
 });
 
@@ -80,9 +81,9 @@ usersController.put("/:id", function (req: any, res: any, next: any) {
   const user = req.body;
   const updatedUsers: any = userService.update(id, user);
   if (updatedUsers.length > 0) {
-    res.status(202).send(success(updatedUsers, null));
+    res.status(202).send(BaseModel.success(updatedUsers, null));
   } else {
-    res.status(404).send(fail("User not found."));
+    res.status(404).send(BaseModel.fail("User not found."));
   }
 });
 
@@ -99,24 +100,10 @@ usersController.delete("/:id", function (req: any, res: any, next: any) {
   const id = parseInt(req.params.id);
   var response = userService.remove(id);
   if (response) {
-    res.status(202).send(success(null, "User deleted successfully."));
+    res.status(202).send(BaseModel.success(null, "User deleted successfully."));
   } else {
-    res.status(404).send(fail("User not found."));
+    res.status(404).send(BaseModel.fail("User not found."));
   }
 });
-function success(data: any, message: any): any {
-  return {
-    success: true,
-    data: data !== null ? data : "",
-    message: message !== null ? message : ""
-  };
-}
-function fail(message: any): any {
-  return {
-    success: false,
-    data: null,
-    message: message
-  };
-}
 
 export default usersController;

@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Node-Api",
-      "program": "${workspaceFolder}/dist/bin/www",
+      "program": "${workspaceFolder}\\dist\\src\\bin\\www.js",
       "preLaunchTask": "build",
       "skipFiles": ["<node_internals>/**"],
       "console": "integratedTerminal"
