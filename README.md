@@ -1,4 +1,4 @@
-# Simple NodeJS API
+# Simple NodeJS API ![Tests](https://github.com/BilalArxd/nodejs-api/workflows/Tests/badge.svg)
 
 ## About
 
