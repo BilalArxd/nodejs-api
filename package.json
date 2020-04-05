@@ -8,22 +8,9 @@
   },
   "scripts": {
     "test": "ts-mocha ./src/__tests__/**/*.test.ts --timeout 10000",
-    "test:coverage": "nyc npm test",
+    "test:coverage": "",
     "start": "tsc && node ./dist/src/bin/www",
     "build:tsc": "tsc"
-  },
-  "nyc": {
-    "extension": [
-      ".ts"
-    ],
-    "exclude": [
-      "**/*.js",
-      "**/*.map.js"
-    ],
-    "reporter": [
-      "html"
-    ],
-    "all": true
   },
   "author": "",
   "license": "ISC",
@@ -45,7 +32,6 @@
     "chai": "^4.2.0",
     "express-swagger-generator": "^1.1.17",
     "mocha": "^7.1.1",
-    "nyc": "^15.0.1",
     "ts-mocha": "^7.0.0",
     "ts-node": "^8.8.2"
   }
