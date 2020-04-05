@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import * as mocha from "mocha";
-import { UserService } from "../../../src/services/userService";
-import { UserRepository } from "../../../src/data/userRepository";
-import { UserList, User } from "../../../src/models/User";
+import { UserService } from "../../../services/userService";
+import { UserRepository } from "../../../data/userRepository";
+import { UserList, User } from "../../../models/User";
 
 describe("userService", function () {
   it("get -> should return some users", function () {
