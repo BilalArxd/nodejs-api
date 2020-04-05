@@ -1,10 +1,11 @@
-import homeController from "../controllers/homeController";
-import usersController from "../controllers/usersController";
+import homeRoute from "../controllers/homeController";
+import userRoute from "./../controllers/userController";
 
 let configureApi = function (app: any) {
-  app.use("/", homeController);
-  app.use("/users", usersController);
+  app.use("/", homeRoute);
+  app.use("/users", userRoute);
 };
+
 export default {
-  configure: configureApi
+  configure: configureApi,
 };

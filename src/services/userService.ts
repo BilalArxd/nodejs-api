@@ -1,35 +1,10 @@
-import userData from "../data/userData";
-import { IUserCollection } from "../models/IUser";
+import { IUser } from "../models/User";
+import { IService, Service } from "./../models/Generics/Service";
+import { IUserRepository } from "./../data/userRepository";
 
-let get = function (): IUserCollection {
-  const response = userData.get();
-  return response;
-};
-
-let getById = function (id: any) {
-  const response = userData.getById(id);
-  return response;
-};
-
-let create = function (user: any) {
-  const response = userData.create(user);
-  return response;
-};
-
-let update = function (id: any, user: any) {
-  const response = userData.update(id, user);
-  return response;
-};
-
-let remove = function (id: any) {
-  const response = userData.remove(id);
-  return response;
-};
-
-export default {
-  create: create,
-  get: get,
-  getById: getById,
-  update: update,
-  remove: remove,
-};
+export interface IUserService extends IService<IUser> {}
+export class UserService extends Service<IUser> implements IUserService {
+  constructor(userRepo: IUserRepository) {
+    super(userRepo);
+  }
+}

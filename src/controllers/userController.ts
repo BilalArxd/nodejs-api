@@ -1,17 +1,24 @@
 import * as express from "express";
-import userService from "../services/userService";
-import { BaseModel } from "../utils/BaseModel";
+import {
+  IBaseController,
+  BaseController,
+} from "./../models/Generics/BaseController";
+import { IUser, UserList } from "./../models/User";
+import { UserService } from "../services/userService";
+import { UserRepository } from "../data/userRepository";
 
-var usersController = express.Router();
+let userController: IBaseController<IUser> = new BaseController<IUser>(
+  new UserService(new UserRepository(new UserList()))
+);
 
-//#region Swagger Specification
+var controller = express.Router();
+
 /**
  * @typedef User
  * @property {number} id - User's unique ID - eg: 123
  * @property {string} name.required - User's fullname with space - eg: John Doe
  * @property {string} email.required - User's email - eg: abc@xyz.com
  */
-//#endregion
 
 /**
  * Get array of all users
@@ -22,9 +29,8 @@ var usersController = express.Router();
  * @returns {Error} 404 - Users not found
  */
 
-usersController.get("/", function (req: any, res: any, next: any) {
-  var users = userService.get();
-  res.status(200).send(BaseModel.success(users));
+controller.get("/", function (req: any, res: any, next: any) {
+  userController.get(req, res, next);
 });
 
 /**
@@ -36,14 +42,9 @@ usersController.get("/", function (req: any, res: any, next: any) {
  * @returns {array} 200 - An array of Users
  * @returns {Error} 404 - Users not found
  */
-usersController.get("/:id", function (req: any, res: any, next: any) {
-  const id = parseInt(req.params.id);
-  var users = userService.getById(id);
-  if (users.length > 0) {
-    res.status(200).send(BaseModel.success(users, null));
-  } else {
-    res.status(404).send(BaseModel.fail("User not found."));
-  }
+
+controller.get("/:id", function (req: any, res: any, next: any) {
+  userController.getSingle(req, res, next);
 });
 
 /**
@@ -56,16 +57,9 @@ usersController.get("/:id", function (req: any, res: any, next: any) {
  * @returns {array} 201 - User created
  * @returns {Error} 400 - Bad Request
  */
-usersController.post("/", function (req: any, res: any, next: any) {
-  const user = req.body;
-  var addedUser = userService.create(user);
-  if (addedUser != null) {
-    res.status(201).send(BaseModel.success(addedUser, null));
-  } else {
-    res.status(404).send(BaseModel.fail("User not found."));
-  }
+controller.post("/", function (req: any, res: any, next: any) {
+  userController.add(req, res, next);
 });
-
 /**
  * Get user object filtered by given id
  * @route PUT /users/1
@@ -76,15 +70,8 @@ usersController.post("/", function (req: any, res: any, next: any) {
  * @returns {object} 202 - User updated
  * @returns {Error} 404 - Users not found
  */
-usersController.put("/:id", function (req: any, res: any, next: any) {
-  const id = parseInt(req.params.id);
-  const user = req.body;
-  const updatedUsers: any = userService.update(id, user);
-  if (updatedUsers.length > 0) {
-    res.status(202).send(BaseModel.success(updatedUsers, null));
-  } else {
-    res.status(404).send(BaseModel.fail("User not found."));
-  }
+controller.put("/:id", function (req: any, res: any, next: any) {
+  userController.update(req, res, next);
 });
 
 /**
@@ -96,14 +83,9 @@ usersController.put("/:id", function (req: any, res: any, next: any) {
  * @returns {object} 202 - An array of Users
  * @returns {Error} 404 - Users not found
  */
-usersController.delete("/:id", function (req: any, res: any, next: any) {
-  const id = parseInt(req.params.id);
-  var response = userService.remove(id);
-  if (response) {
-    res.status(202).send(BaseModel.success(null, "User deleted successfully."));
-  } else {
-    res.status(404).send(BaseModel.fail("User not found."));
-  }
+
+controller.delete("/:id", function (req: any, res: any, next: any) {
+  userController.delete(req, res, next);
 });
 
-export default usersController;
+export default controller;
