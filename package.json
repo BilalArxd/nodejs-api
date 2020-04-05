@@ -7,7 +7,8 @@
     "test": "__test__"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest ",
+    "coverage": "jest --coverage",
     "start": "tsc && node ./dist/src/bin/www",
     "build:tsc": "tsc"
   },
