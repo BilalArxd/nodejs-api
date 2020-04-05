@@ -7,9 +7,14 @@ import { IUser, UserList } from "./../models/User";
 import { UserService } from "../services/userService";
 import { UserRepository } from "../data/userRepository";
 
-let userController: IBaseController<IUser> = new BaseController<IUser>(
-  new UserService(new UserRepository(new UserList()))
-);
+export class UserController extends BaseController<IUser>
+  implements IBaseController<IUser> {
+  constructor() {
+    super(new UserService(new UserRepository(new UserList())));
+  }
+}
+
+let userController: UserController = new UserController();
 
 var controller = express.Router();
 
@@ -88,4 +93,4 @@ controller.delete("/:id", function (req: any, res: any, next: any) {
   userController.delete(req, res, next);
 });
 
-export default controller;
+export const userRoute = controller;

@@ -51,3 +51,4 @@ dist/src/models/Generics/Repository.js
 dist/src/models/Generics/Repository.js.map
 dist/src/models/Generics/Service.js
 dist/src/models/Generics/Service.js.map
+yarn.lock

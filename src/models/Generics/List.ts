@@ -35,7 +35,6 @@ export class List<T> implements IList<T> {
   add(model: any): T {
     model.id = this.getNextId();
     this.collection.push(model);
-    this.save();
     return model;
   }
   delete(id: number): boolean {
@@ -47,7 +46,6 @@ export class List<T> implements IList<T> {
           return false;
         }
       });
-      this.save();
       return true;
     } catch (error) {
       console.log(`ERR: ${error}`);
@@ -65,7 +63,6 @@ export class List<T> implements IList<T> {
       if (u.id === id) return true;
       return false;
     })[0];
-    this.save();
     return updatedmodel;
   }
   private getNextId(): number {
