@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - name: Run Jest
-        uses: stefanoeb/jest-action@1.0.2
+    - name: Jest Code Coverage Report
+      uses: ziishaned/jest-reporter-action@0.1.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        test-command: npm run coverage
