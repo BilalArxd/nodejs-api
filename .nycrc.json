@@ -1,6 +1,0 @@
-{
-  "cache": false,
-  "extension": [".ts"],
-  "check-coverage": true,
-  "include": ["src/**"]
-}

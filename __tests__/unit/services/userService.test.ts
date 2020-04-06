@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import * as mocha from "mocha";
-import { UserService } from "../../../services/userService";
-import { UserRepository } from "../../../data/userRepository";
-import { UserList, User } from "../../../models/User";
+import { UserList, User } from "../../../src/models/User";
+import { UserRepository } from "../../../src/data/userRepository";
+import { UserService } from "../../../src/services/userService";
 
 describe("userService", function () {
   it("get -> should return some users", function () {
@@ -29,13 +29,12 @@ describe("userService", function () {
     // 1. ARRANGE
     var userService = new UserService(new UserRepository(new UserList()));
     var id = 5;
-    var user = new User(5, "Fifth User", "fifth@yopmail.com");
+    var user = new User(id, "Fifth User", "fifth@yopmail.com");
     // 2. ACT
-    var user = userService.add(user);
-    var userCollection = userService.get();
+    var addedUser = userService.add(user);
 
     // 3. ASSERT
-    expect(user).to.be.equal(userCollection[id - 1]);
+    expect(user).to.be.equal(addedUser);
   });
 
   it("update -> should update user with given id", function () {
